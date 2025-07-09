@@ -1,0 +1,87 @@
+---
+layout: default
+---
+
+<div class="home">
+  <h1 class="page-heading">Welcome to {{ site.title }}</h1>
+  
+  <p>{{ site.description }}</p>
+
+  {% comment %} Check if current user is elorm116 or in admin list {% endcomment %}
+  {% assign is_admin = false %}
+  {% assign current_user = "elorm116" %}
+  
+  {% for admin in site.admin_users %}
+    {% if admin == current_user %}
+      {% assign is_admin = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+  
+  {% if is_admin %}
+    <div class="admin-section">
+      <h2>Admin Section</h2>
+      <p>Welcome, elorm116! You have admin access to my-jekyll-site.</p>
+      <ul>
+        <li><a href="{{ '/admin' | relative_url }}">Admin Dashboard</a></li>
+        <li><a href="https://github.com/elorm116/my-jekyll-site/settings">Repository Settings</a></li>
+        <li><a href="https://github.com/elorm116/my-jekyll-site/settings/collaboration">Manage Collaborators</a></li>
+        <li><a href="https://github.com/elorm116/my-jekyll-site/new/main/_posts">Create New Post</a></li>
+      </ul>
+    </div>
+  {% endif %}
+
+  <h2>Recent Posts</h2>
+  
+  <ul class="post-list">
+    {% for post in site.posts limit:5 %}
+      <li>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+        <h3>
+          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        </h3>
+        <p>{{ post.excerpt | strip_html | truncate: 150 }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+</div>
+
+<style>
+.admin-section {
+  background: #e8f5e8;
+  border: 2px solid #4caf50;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+}
+
+.admin-section h2 {
+  color: #2e7d32;
+  margin-top: 0;
+}
+
+.admin-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.admin-section li {
+  margin: 10px 0;
+}
+
+.admin-section a {
+  color: #1976d2;
+  text-decoration: none;
+  padding: 8px 12px;
+  background: #f5f5f5;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.admin-section a:hover {
+  background: #e0e0e0;
+  text-decoration: underline;
+}
+</style>
