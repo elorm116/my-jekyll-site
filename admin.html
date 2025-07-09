@@ -1,0 +1,107 @@
+---
+layout: default
+title: Admin Dashboard
+---
+
+<div class="admin-dashboard">
+  <h1>Admin Dashboard</h1>
+
+  {% assign current_user = "elorm116" %}
+  {% assign is_admin = false %}
+  
+  {% for admin in site.admin_users %}
+    {% if admin == current_user %}
+      {% assign is_admin = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {% if is_admin %}
+    <div class="admin-content">
+      <h2>Site Management</h2>
+      
+      <div class="admin-section">
+        <h3>Content Management</h3>
+        <ul>
+          <li><a href="https://github.com/elorm116/my-jekyll-site/new/main/_posts">Create New Post</a></li>
+          <li><a href="https://github.com/elorm116/my-jekyll-site/tree/main/_posts">Manage Posts</a></li>
+          <li><a href="https://github.com/elorm116/my-jekyll-site/edit/main/_config.yml">Edit Site Configuration</a></li>
+        </ul>
+      </div>
+
+      <div class="admin-section">
+        <h3>User Management</h3>
+        <p>Current admin users:</p>
+        <ul>
+          {% for admin in site.admin_users %}
+            <li>{{ admin }}</li>
+          {% endfor %}
+        </ul>
+        <p><a href="https://github.com/elorm116/my-jekyll-site/settings/access">Manage Repository Collaborators</a></p>
+      </div>
+
+      <div class="admin-section">
+        <h3>Site Statistics</h3>
+        <ul>
+          <li>Total Posts: {{ site.posts.size }}</li>
+          <li>Last Updated: {{ site.time | date: "%Y-%m-%d %H:%M" }}</li>
+          <li>Repository: <a href="https://github.com/elorm116/my-jekyll-site">my-jekyll-site</a></li>
+        </ul>
+      </div>
+
+      <div class="admin-section">
+        <h3>GitHub Actions</h3>
+        <ul>
+          <li><a href="https://github.com/elorm116/my-jekyll-site/actions">View Build Status</a></li>
+          <li><a href="https://github.com/elorm116/my-jekyll-site/settings/pages">Pages Settings</a></li>
+        </ul>
+      </div>
+    </div>
+  {% else %}
+    <div class="access-denied">
+      <h2>Access Denied</h2>
+      <p>You don't have admin access to this site.</p>
+      <p><a href="{{ '/' | relative_url }}">Return to Home</a></p>
+    </div>
+  {% endif %}
+</div>
+
+<style>
+.admin-section {
+  background: #f5f5f5;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 5px;
+}
+
+.admin-section h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.admin-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.admin-section li {
+  padding: 5px 0;
+}
+
+.admin-section a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.admin-section a:hover {
+  text-decoration: underline;
+}
+
+.access-denied {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+</style>
