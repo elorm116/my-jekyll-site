@@ -1,0 +1,38 @@
+# Site settings
+title: My Jekyll Site
+description: A simple Jekyll application with admin access
+url: "https://elorm116.github.io"
+baseurl: "/my-jekyll-site"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# GitHub Pages settings
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Admin users (GitHub usernames)
+admin_users:
+  - "elorm116"
+  - "noahalorwu"
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /:categories/:year/:month/:day/:title/
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
